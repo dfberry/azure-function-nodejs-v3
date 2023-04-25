@@ -10,8 +10,9 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: './api/.' # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '18.x' # set this to the node version to use (supports 8.x, 10.x, 12.x)
+  VERBOSE: 'true' # optional, set to 'true' to get extra logging information
 
 jobs:
   build-and-deploy:
@@ -28,7 +29,6 @@ jobs:
       - name: 'Resolve Project Dependencies Using Npm'
         shell: bash
         run: |
-          cd api
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           npm install
           npm run build --if-present
@@ -41,5 +41,5 @@ jobs:
         with:
           app-name: 'dfberry-api-v3'
           slot-name: 'Production'
-          package: ./api/.
+          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8D447F20E7D741959A9B3F636CF3124E }}
