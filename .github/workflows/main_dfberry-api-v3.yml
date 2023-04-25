@@ -41,5 +41,5 @@ jobs:
         with:
           app-name: 'dfberry-api-v3'
           slot-name: 'Production'
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/.
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8D447F20E7D741959A9B3F636CF3124E }}
