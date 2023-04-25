@@ -1,4 +1,6 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
+import { version } from '../package.json';
+
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     context.log('HTTP trigger function processed a request.');
@@ -9,7 +11,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
 
     context.res = {
         // status: 200, /* Defaults to 200 */
-        body: responseMessage
+        body: responseMessage + ' ' + version
     };
 
 };
